@@ -2,10 +2,13 @@ package com.ossnm.data;
 
 import com.google.common.hash.Hashing;
 import com.mongodb.DB;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javafx.util.Pair;
 
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.function.BiConsumer;
@@ -18,7 +21,7 @@ public class userManager {
     public userManager() {
     }
 
-    public static User createNewUser(String username, String password, String email, String encryptionType, DB db) {
+    public static User createNewUser(String username, String password, String email, DB db) {
         //CHECK IF IT ALREAD EXISTS
         if(databaseOperations.verifyUserIsInDB(username, UserField.username, db)){
             LOGGER.info("User Already in DB - Failing User Creation");
@@ -34,7 +37,8 @@ public class userManager {
 
         String passwordHash = getPasswordHash(password);
         User newUser = new User(username, passwordHash, email);
-        databaseOperations.addUsertoDb(username, passwordHash, email, encryptionType, db);
+        databaseOperations.addUsertoDb(username, passwordHash, email, db);
+        LOGGER.info("Finished user Creation");
         return newUser;
     }
 
@@ -124,5 +128,10 @@ public class userManager {
                 .hashString(password, StandardCharsets.UTF_8)
                 .toString();
         return passwordHash;
+    }
+
+    public static DB getDB() throws UnknownHostException {
+        MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
+        return mongoClient.getDB( "Accounts" );
     }
 }

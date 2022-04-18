@@ -15,14 +15,13 @@ public abstract class databaseOperations {
     private static final Logger LOGGER = LogManager.getLogger(databaseOperations.class);
 
 
-    public static boolean addUsertoDb(String username, String passwordHash, String email, String encryptionType, DB db) {
+    public static boolean addUsertoDb(String username, String passwordHash, String email, DB db) {
         DBCollection collection = db.getCollection("Clients");
         List<DBObject> array = new ArrayList<DBObject>();
         BasicDBObject doc = new BasicDBObject();
         doc.put("username", username);
         doc.put("password", passwordHash);
         doc.put("email", email);
-        doc.put("encryptionType", encryptionType);
         doc.put("passwordList", array);
         collection.insert(doc);
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui.HelloController">
+   <children>
+      <Button id="pressRegister" fx:id="pressRegister" layoutX="384.0" layoutY="305.0" mnemonicParsing="false" onAction="#onRegisterButtonClick" text="Register" />
+      <PasswordField id="RegisterPassword" fx:id="RegisterPassword" layoutX="174.0" layoutY="211.0" />
+      <TextField id="RegisterUsername" fx:id="RegisterUsername" layoutX="174.0" layoutY="156.0" />
+      <Label layoutX="174.0" layoutY="130.0" text="Username" />
+      <Label layoutX="174.0" layoutY="192.0" text="Password" />
+      <Label layoutX="174.0" layoutY="249.0" text="Email" />
+      <TextField id="RegisterEmail" fx:id="RegisterEmail" layoutX="174.0" layoutY="273.0" />
+      <Label id="MessageFailRegister" fx:id="MessageFailRegister" layoutX="370.0" layoutY="277.0" textFill="RED" />
+   </children>
+</Pane>
