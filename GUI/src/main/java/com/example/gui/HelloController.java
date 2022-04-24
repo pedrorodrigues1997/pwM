@@ -3,12 +3,13 @@ package com.example.gui;
 import com.ossnm.data.User;
 import com.ossnm.data.userManager;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.Objects;
 
 public class HelloController {
     @FXML
@@ -25,9 +26,11 @@ public class HelloController {
 
     @FXML
     private TextField RegisterEmail;
+    @FXML
+    private Pane Pane;
 
     @FXML
-    protected void onRegisterButtonClick() {
+    protected void onRegisterButtonClick() throws IOException {
         String username = RegisterUsername.getText();
         String password = RegisterPassword.getText();
         String email = RegisterEmail.getText();
@@ -40,7 +43,8 @@ public class HelloController {
                }
 
                //skip login and load the new main page
-
+                ScrollPane newPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main-view.fxml")));
+                Pane.getChildren().setAll(newPane);
 
             } catch (UnknownHostException e) {
                 e.printStackTrace();

@@ -6,11 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.Objects;
 
 public class LoginController {
@@ -27,12 +27,14 @@ public class LoginController {
     private Pane Pane;
 
     @FXML
-    protected void onLoginButtonClick() throws UnknownHostException {
+    protected void onLoginButtonClick() throws IOException {
        User user = userManager.authenticateUser(RegisterUsername.getText(), RegisterPassword.getText(), userManager.getDB());
        if(user == null){
            MessageFailLogin.setText("Wrong Credentials/User not found");
        }else{
            //Load new FXML of main window where all the password are shown
+           ScrollPane newPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main-view.fxml")));
+           Pane.getChildren().setAll(newPane);
        }
 
     }

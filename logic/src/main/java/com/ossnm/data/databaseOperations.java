@@ -6,6 +6,7 @@ import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -130,7 +131,7 @@ public abstract class databaseOperations {
 
     }
 
-    public static User getUserFromDB(String username,String password, DB db) {
+    public static User getUserFromDB(String username,String password, DB db) throws UnknownHostException {
         HashMap<String, Pair<String, String>> passwordList = new HashMap<>();
         DBCollection collection = db.getCollection("Clients");
         BasicDBObject userQuery = new BasicDBObject();
@@ -149,7 +150,7 @@ public abstract class databaseOperations {
                 passwordList.put(Account, userPass);
             });
            User user = new User(object.get("username").toString(), password, object.get("email").toString());
-           user.setPasswordList(passwordList);
+           user.setPasswordList();
            LOGGER.info("Fetched user {} from Database", user.toString());
            return user;
 

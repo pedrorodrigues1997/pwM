@@ -4,15 +4,19 @@ import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.net.UnknownHostException;
 import java.util.HashMap;
+
+import static com.ossnm.data.userManager.getDB;
+import static com.ossnm.data.userManager.getUserPasswords;
 
 public class User {
 
-    private static String username;
-    private static String passwordHash;
-    private static String email;
-    private static boolean isAuthenticated;
-    private static HashMap<String, Pair<String, String>> passwordList = new HashMap<>();
+    private String username;
+    private String passwordHash;
+    private String email;
+    private boolean isAuthenticated;
+    private HashMap<String, Pair<String, String>> passwordList = new HashMap<>();
 
 
 
@@ -30,7 +34,7 @@ public class User {
     }
 
     public void setUsername(String username) {
-        User.username = username;
+        this.username = username;
     }
 
     public String getPasswordHash() {
@@ -38,7 +42,7 @@ public class User {
     }
 
     public void setPasswordHash(String passwordHash) {
-        User.passwordHash = passwordHash;
+        this.passwordHash = passwordHash;
     }
 
     public String getEmail() {
@@ -46,7 +50,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        User.email = email;
+        this.email = email;
     }
 
     public boolean isIsAuthenticated() {
@@ -54,15 +58,15 @@ public class User {
     }
 
     public void setIsAuthenticated(boolean isAuthenticated) {
-        User.isAuthenticated = isAuthenticated;
+        this.isAuthenticated = isAuthenticated;
     }
 
     public HashMap<String, Pair<String, String>> getPasswordList() {
         return passwordList;
     }
 
-    public void setPasswordList(HashMap<String, Pair<String, String>> passwordList) {
-        User.passwordList = passwordList;
+    public void setPasswordList() throws UnknownHostException {
+        this.passwordList = getUserPasswords(this, true, getDB());
     }
 
     @Override

@@ -24,6 +24,10 @@ public abstract class Cryptography {
     private static Path path = Paths.get("C:\\Users\\pedro\\Documents\\pwManager\\cipherKey.txt");
     private static IvParameterSpec ivParameterSpec = null;
 
+    //TODO:Quando fazemos passwords novas em runs diferentes o IVParameter vai ser null. Logo ele vai gerar uma nova encryption key. O que va dar cabo das desencriptações de coisas que foram encriptadas noutras runs.
+    //TODO Soluções incluem: Passar a guardar as chaves noutra collection por segurança e fica em operações por DBs. Ou fazer um ficheiro para o IV. PARA DB é a melhor solucão
+
+
     public static String encryptPassword(String plaintext) {
         try {
             if (ivParameterSpec == null) {
