@@ -38,6 +38,10 @@ public class HelloController {
                if(newUser == null){
                    MessageFailRegister.setText("Password smaller than 8 characters!");
                }
+
+               //skip login and load the new main page
+
+
             } catch (UnknownHostException e) {
                 e.printStackTrace();
             }
